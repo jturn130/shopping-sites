@@ -7,7 +7,7 @@ Authors: Joel Burton, Christian Fernandez, Meggie Mahnken.
 """
 
 
-from flask import Flask, render_template, redirect, flash
+from flask import Flask, render_template, redirect, flash, session
 import jinja2
 
 import melons
@@ -60,6 +60,17 @@ def show_melon(melon_id):
 def shopping_cart():
     """Display content of shopping cart."""
 
+    # melon_id_attributes = melons.get_by_id
+
+    # session['id'] = melon_id
+
+
+
+
+
+
+
+
     # TODO: Display the contents of the shopping cart.
 
     # The logic here will be something like:
@@ -81,6 +92,13 @@ def add_to_cart(id):
     When a melon is added to the cart, redirect browser to the shopping cart
     page and display a confirmation message: 'Successfully added to cart'.
     """
+    if 'cart' not in session:
+        session['cart'] = [id]
+    else:
+        session['cart'].append(id)
+
+
+
 
     # TODO: Finish shopping cart functionality
 
@@ -88,7 +106,7 @@ def add_to_cart(id):
     #
     # - add the id of the melon they bought to the cart in the session
 
-    return "Oops! This needs to be implemented!"
+    return redirect("/cart")
 
 
 @app.route("/login", methods=["GET"])
